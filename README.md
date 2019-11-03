@@ -6,6 +6,7 @@ Code for extracting speaker embeddings using x-vector as input (comes with pre-t
     python (verified with v3.6)
     Tensorflow-gpu (verified with v1.8.0)
     keras (verified with v2.1.2)
+    kaldi
 
 ## Usage
 
