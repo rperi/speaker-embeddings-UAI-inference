@@ -59,12 +59,11 @@ def main():
         help='output directory to save embeddings'
     )
     parser.add_argument(
-        'save_kaldi_flag', type=bool,
+        'save_kaldi_flag', type=int, default=1,
         help='whether to save the output embeddings as kaldi format scp files or not'
     )
     
     args = parser.parse_args()
-
 
     # Load data util and config for network-modules
     
@@ -77,14 +76,15 @@ def main():
 
     embeddings1, embeddings2 = \
         get_predictions_test(
-        model_config, args.checkpoint_epoch, os.path.join(args.weights_root, args.model_name), data)
+        model_config,  
+        args.checkpoint_epoch, os.path.join(args.weights_root, args.model_name), data)
 
     # Save predictions and embeddings (for further use to visualize and compute accuracy)
     numpy.save(os.path.join(args.output_dir,"embed_1_test"), embeddings1)
     numpy.save(os.path.join(args.output_dir,"embed_2_test"), embeddings2)
     print('\nEmbeddings saved at %s \n' % args.output_dir)
 
-    if args.save_kaldi_flag:
+    if args.save_kaldi_flag == 1:
         if not os.path.exists(args.utts_file):
             sys.exit("numpy array containing utterance information doesn't exist. Exiting!!!")
 
