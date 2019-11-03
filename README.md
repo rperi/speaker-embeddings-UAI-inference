@@ -1,14 +1,14 @@
 # speaker_embeddings_UAI_predict
-Code for extracting speaker embeddings using x-vector as input (comes with pre-trained model)
-Extracts 2 disentangled embeddings
-    embed1 containing speaker information
-    embed2 containing all other information
+    Code for extracting speaker embeddings using x-vector as input (comes with pre-trained model)
+    Extracts 2 disentangled representations from the x-vectors
+        embed1 containing speaker information
+        embed2 containing all other information
 
 ## Dependencies
- 1) python (verified with v3.6)
- 2) Tensorflow-gpu (verified with v1.8.0)
- 3) keras (verified with v2.1.2)
- 4) kaldi (verified with v5.5)
+    1) python (verified with v3.6)
+    2) Tensorflow-gpu (verified with v1.8.0)
+    3) keras (verified with v2.1.2)
+    4) kaldi (verified with v5.5)
 
 ## Example usage
 
