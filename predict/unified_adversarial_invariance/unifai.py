@@ -28,16 +28,15 @@ class UnifAI_Config(object):
 
 class UnifAI_ModuleBuilder(object):
     
-    def __init__(self, model_config, weights_dir, epoch_start):
+    def __init__(self, model_config, weights_path):
         self.model_config = model_config
-        self.weights_dir = weights_dir
+        self.weights_path = weights_path
         self.build_functions = {
             'encoder': self.model_config.encoder,
         }
-        self.epoch_start = epoch_start
     
     def build_module(self, module_type, name=None,
-                     build_kwargs={}, epoch=None, load_weights=True):
+                     build_kwargs={}, load_weights=True):
         # Default model-name is the same as model-type
         if name is None:
             name = module_type
@@ -46,31 +45,29 @@ class UnifAI_ModuleBuilder(object):
         module = self.build_functions[module_type](name=name, **build_kwargs)
 
         # Load module
-        weights_path = "{}/encoder-{:05d}.h5".format(self.weights_dir,self.epoch_start) 
-        module = load_model(weights_path)
+        module = load_model(self.weights_path)
 
         return module
 
 
 class UnifAI(object):
     
-    def __init__(self, config, epoch_start):
+    def __init__(self, config):
         self.config = config
         self.model_config = self.config.model_config  # alias
-        self.epoch_start = epoch_start
         self.module_builder = UnifAI_ModuleBuilder(
-            self.model_config, self.config.remote_weights_path, self.epoch_start
+            self.model_config, self.config.remote_weights_path
         )
         
         self.encoder = None
         self.model_inference = None
     
-    def build_model_inference(self, checkpoint_epoch=None):
+    def build_model_inference(self):
         if self.model_inference is None:
             device = '/gpu:0'
             with tf.device(device):
                 self.encoder = self.module_builder.build_module(
-                    'encoder', epoch=checkpoint_epoch
+                    'encoder'
                 )
                 
                 x = self.encoder.inputs[0]

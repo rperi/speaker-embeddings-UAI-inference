@@ -7,13 +7,10 @@ convert2numpy_flag=True
 save_kaldi_flag=1
 
 inp_dir=$PWD/example/input
-out_dir_base=$PWD/example/output/
-weights_dir=$PWD/example/model/
+out_dir=$PWD/example/output/
+weights_path=$PWD/example/model/xvector_uai_model/encoder-00359.h5
 
-checkpoint_epoch=359
 
-unique_id=xvec_ep${checkpoint_epoch}
-out_dir=${out_dir_base}/${unique_id}
 mkdir -p ${out_dir}
 
 feats_scp=${inp_dir}/xvector.scp
@@ -25,14 +22,15 @@ if [[ $convert2numpy_flag == True ]]; then
   cd ../pre_process
   python3 convert_scp2numpy.py ${feats_scp} ${inp_dir}
   cd ../predict/
+  echo "DONE converting scp files to numpy arrays"
   #exit
 
 else
   echo "Script expects input xvectors as numpy array ${inp_dir}/test_data.npy"
 fi
 
-python3 predict.py xvector_uai xvector_uai_model \
-$numpy_feats_file $numpy_utts_file $weights_dir $checkpoint_epoch \
+python3 predict.py xvector_uai \
+$numpy_feats_file $numpy_utts_file $weights_path \
 ${out_dir} ${save_kaldi_flag} || exit 1
 
 echo "Succesfully extracted embeddings and saved to ${out_dir}"

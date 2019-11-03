@@ -9,16 +9,16 @@ import numpy
 import os
 import sys
 
-def get_predictions_test(model_config, checkpoint_epoch,
-                         remote_weights_path, data):
+def get_predictions_test(model_config,
+                         weights_path, data):
     # Create config
     config = UnifAI_Config()
     config.model_config = model_config
-    config.remote_weights_path = remote_weights_path
+    config.remote_weights_path = weights_path
    
     # Build model
-    unifai = UnifAI(config, checkpoint_epoch)
-    unifai.build_model_inference(checkpoint_epoch=checkpoint_epoch)
+    unifai = UnifAI(config)
+    unifai.build_model_inference()
     unifai.model_inference.summary()
     # Set up data configuration
 
@@ -35,10 +35,6 @@ def main():
         help='name of dataset'
     )
     parser.add_argument(
-        'model_name', type=str,
-        help='model name'
-    )
-    parser.add_argument(
         'feats_file', type=str,
         help='full path of the data(xvector array to be used as input for prediction) file'
     )
@@ -47,12 +43,8 @@ def main():
         help='full path of the utterances numpy array(corresponding to the feats_file above) file'
     )
     parser.add_argument(
-        'weights_root', type=str,
-        help='root dir of path containing model weights. Should contain "encoder-epoch.h5", For example encoder-00359.h5'
-    )
-    parser.add_argument(
-        'checkpoint_epoch', type=int,
-        help='checkpoint epoch'
+        'weights_path', type=str,
+        help='Path of model weights as .h5 file'
     )
     parser.add_argument(
         'output_dir', type=str,
@@ -77,11 +69,11 @@ def main():
     embeddings1, embeddings2 = \
         get_predictions_test(
         model_config,  
-        args.checkpoint_epoch, os.path.join(args.weights_root, args.model_name), data)
+        args.weights_path, data)
 
     # Save predictions and embeddings (for further use to visualize and compute accuracy)
-    numpy.save(os.path.join(args.output_dir,"embed_1_test"), embeddings1)
-    numpy.save(os.path.join(args.output_dir,"embed_2_test"), embeddings2)
+    numpy.save(os.path.join(args.output_dir,"embed1_test"), embeddings1)
+    numpy.save(os.path.join(args.output_dir,"embed2_test"), embeddings2)
     print('\nEmbeddings saved at %s \n' % args.output_dir)
 
     if args.save_kaldi_flag == 1:
