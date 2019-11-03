@@ -1,6 +1,5 @@
 #!/bin/bash
 
-source activate_env.sh
 source path.sh
 
 convert2numpy_flag=${4} #True
