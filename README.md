@@ -9,16 +9,18 @@ Code for extracting speaker embeddings using x-vector as input (comes with pre-t
 
 ## Usage
 
-    Step 1. Modify activate_env.sh to activate local conda environment
-    Step 2. Modify KALDI_ROOT in path.sh
-    Step 3. After running Steps 1 and 2 above, run the following command
-    "bash run_predict_dis.sh $PWD/example/input $PWD/example/output/ $PWD/example/model/xvector_uai_model/encoder-00359.h5 True 1"
+    Step 1. 
+        IF python environment exists, then ignore activate your own envirnoment before proceeding further
+        IF no exiting python environment exists, then run "activate_env.sh" to create a new conda environment using provided environment.yml file (requires anaconda v3)
+    Step 2. Modify KALDI_ROOT in path.sh to path in your local machine
+    Step 3. After running Steps 1 and 2 above, run the following "example" command
+    bash run_predict_dis.sh $PWD/example/input $PWD/example/output/ $PWD/example/model/xvector_uai_model/encoder-00359.h5 True 1
 
 ## Inputs
     Takes 5 arguments
         inp_dir: Directory containing xvectors either as "xvector.scp" or "test_data.npy" and "test_utt.npy"
         
-        out_dir_base: Directory where the output embeddings are saved
+        out_dir: Directory where the output embeddings are saved
         
         weights_path: Path to encoder model
         

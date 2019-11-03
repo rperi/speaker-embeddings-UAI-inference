@@ -3,12 +3,12 @@
 source activate_env.sh
 source path.sh
 
-convert2numpy_flag=True
-save_kaldi_flag=1
+convert2numpy_flag=${4} #True
+save_kaldi_flag=${5} #1
 
-inp_dir=$PWD/example/input
-out_dir=$PWD/example/output/
-weights_path=$PWD/example/model/xvector_uai_model/encoder-00359.h5
+inp_dir=${1} #$PWD/example/input
+out_dir=${2} #$PWD/example/output/
+weights_path=${3} #$PWD/example/model/xvector_uai_model/encoder-00359.h5
 
 
 mkdir -p ${out_dir}
