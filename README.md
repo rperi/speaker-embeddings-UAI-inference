@@ -1,5 +1,5 @@
 # speaker_embeddings_UAI_predict
-    Code for extracting speaker embeddings using x-vector as input (comes with pre-trained model)
+    Code for extracting speaker embeddings using x-vector as input (comes with pre-trained model). Based on unsupervised adversarial invariance technique
     Extracts 2 disentangled representations from the x-vectors
         embed1 containing speaker information
         embed2 containing all other information
