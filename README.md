@@ -6,7 +6,7 @@
         embed1 containing speaker information
         embed2 containing all other information
         
-[Submission can be found in](https://arxiv.org/pdf/1911.00940.pdf)
+[arxiv submission](https://arxiv.org/pdf/1911.00940.pdf)
 
 ## Dependencies
     1) python (verified with v3.6)
