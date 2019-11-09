@@ -1,7 +1,8 @@
 # speaker_embeddings_UAI_inference
     Code for extracting speaker embeddings using x-vector as input (comes with pre-trained model)
     Based on unsupervised adversarial invariance technique
-    Submitted to IEEE International Conference on Acoustics, Speech and Signal Processing 2020 (https://arxiv.org/pdf/1911.00940.pdf)
+    Submitted to IEEE International Conference on Acoustics, Speech and Signal Processing 2020 
+    [Submission can be found in](https://arxiv.org/pdf/1911.00940.pdf)
     Extracts 2 disentangled representations from the x-vectors
         embed1 containing speaker information
         embed2 containing all other information
